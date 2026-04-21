@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSE Quotation | N Square Energies</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #0ea44b;
+  --dark-green: #087536;
+  --light-green: #d4f5e2;
+  --bg: #f6fff8;
+  --white: #ffffff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #d1fae5;
+  --red: #e11d48;
+  --shadow: 0 4px 24px rgba(14,164,75,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* TOP APP BAR */
+#appbar {
+  background: linear-gradient(135deg, var(--dark-green) 0%, var(--green) 100%);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 16px rgba(8,117,54,0.25);
+  position: sticky; top: 0; z-index: 100;
+  min-height: 64px; gap: 12px; flex-wrap: wrap;
+}
+.appbar-brand { display: flex; align-items: center; gap: 10px; }
+.appbar-logo { width: 40px; height: 40px; }
+.appbar-title { color: white; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; line-height: 1.1; }
+.appbar-title span { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.85; letter-spacing: 1px; }
+.appbar-btns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn {
+  padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.5px; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+}
+.btn-white { background: white; color: var(--dark-green); }
+.btn-white:hover { background: var(--light-green); }
+.btn-outline { background: rgba(255,255,255,0.15); color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { background: rgba(255,255,255,0.25); }
+.btn-red { background: var(--red); color: white; }
+.btn-red:hover { background: #be123c; }
+
+/* MAIN CONTENT */
+#main { max-width: 960px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* SECTION CARD */
+.section-card {
+  background: white; border-radius: 16px; margin-bottom: 24px;
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.section-header {
+  background: linear-gradient(135deg, var(--dark-green), var(--green));
+  padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+}
+.section-num {
+  width: 28px; height: 28px; background: white; color: var(--dark-green);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;
+}
+.section-title { color: white; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; }
+.section-body { padding: 24px 20px; }
+
+/* FORM FIELDS */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.form-full { grid-column: 1 / -1; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 1px; color: var(--green); text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 14px;
+  font-size: 0.9rem; font-family: 'Open Sans', sans-serif; color: var(--text);
+  background: var(--bg); transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(14,164,75,0.12);
+}
+.form-textarea { resize: vertical; min-height: 72px; }
+.subsection-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem;
+  color: var(--dark-green); text-transform: uppercase; letter-spacing: 1px;
+  border-bottom: 2px solid var(--light-green); padding-bottom: 8px; margin-bottom: 16px;
+}
+
+/* COMMERCIAL TABLE */
+.commercial-table { width: 100%; border-collapse: collapse; }
+.commercial-table thead tr { background: var(--dark-green); }
+.commercial-table thead th {
+  padding: 12px 14px; color: white; text-align: left;
+  font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+}
+.commercial-table thead th:last-child { text-align: right; }
+.commercial-table tbody tr { border-bottom: 1px solid var(--border); }
+.commercial-table tbody tr:hover { background: #f0fdf4; }
+.row-label { padding: 10px 14px; }
+.row-label strong { display: block; color: var(--green); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85rem; }
+.row-label small { color: var(--muted); font-size: 0.75rem; }
+.row-input-cell { padding: 8px 8px; }
+.row-input-cell input {
+  border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px;
+  font-size: 0.88rem; background: var(--bg); width: 100%;
+  font-family: 'Open Sans', sans-serif; color: var(--text);
+}
+.row-input-cell input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 2px rgba(14,164,75,0.1); }
+.amount-cell { padding: 8px 14px; text-align: right; }
+.amount-cell input {
+  border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 10px;
+  font-size: 0.9rem; font-weight: 700; text-align: right; background: var(--bg);
+  width: 130px; font-family: 'Montserrat', sans-serif; color: var(--text);
+}
+.amount-cell input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 2px rgba(14,164,75,0.1); }
+.subsidy-row { background: #fff7ed !important; }
+.subsidy-row .row-label strong { color: #ea580c; }
+.subsidy-row .row-input-cell input { border-color: #fed7aa; }
+.subsidy-row .amount-cell input { border-color: #fed7aa; color: #ea580c; }
+
+/* FINANCIAL SUMMARY */
+.fin-summary { background: var(--bg); border-radius: 12px; padding: 20px; margin-top: 20px; border: 1.5px solid var(--border); }
+.fin-title { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--dark-green); margin-bottom: 14px; font-size: 0.9rem; }
+.fin-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #d1fae5; }
+.fin-row:last-child { border-bottom: none; }
+.fin-row-label { color: var(--text); font-size: 0.88rem; }
+.fin-row-value { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--dark-green); }
+.fin-row.subsidy .fin-row-label { color: #ea580c; }
+.fin-row.subsidy .fin-row-value { color: #ea580c; }
+.fin-net { background: var(--dark-green); border-radius: 10px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin: 12px 0; }
+.fin-net-label { color: white; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; }
+.fin-net-value { color: white; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.2rem; }
+.fin-words { background: #f0fdf4; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; border: 1px solid #bbf7d0; }
+.fin-words-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.fin-words-text { font-size: 0.88rem; color: var(--dark-green); font-weight: 600; font-style: italic; }
+.fin-extras { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.fin-extra-box { background: white; border-radius: 8px; padding: 12px; border: 1.5px solid var(--border); }
+.fin-extra-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.fin-extra-val { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--dark-green); }
+.fin-advance-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; background: white; border-radius: 10px; padding: 14px; border: 1.5px solid var(--border); }
+.fin-advance-label { flex: 1; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.fin-advance-pct input { width: 80px; border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 10px; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: var(--dark-green); background: var(--bg); }
+.fin-advance-amt { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: var(--dark-green); min-width: 140px; text-align: right; }
+
+/* TECH SPECS */
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.spec-row { display: contents; }
+.spec-row > div { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+.spec-row > div:first-child { color: var(--green); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem; display: flex; align-items: center; }
+.spec-row > div:last-child input { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 0.88rem; background: var(--bg); font-family: 'Open Sans', sans-serif; }
+.spec-row > div:last-child input:focus { outline: none; border-color: var(--green); }
+
+/* WARRANTY */
+.warranty-grid { display: grid; gap: 12px; }
+.warranty-row { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.warranty-label { color: var(--green); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* T&C */
+.tc-list { display: flex; flex-direction: column; gap: 12px; }
+.tc-item { display: flex; gap: 14px; align-items: flex-start; }
+.tc-num { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--green); font-size: 1.1rem; min-width: 28px; }
+.tc-input { flex: 1; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 0.88rem; font-family: 'Open Sans', sans-serif; background: var(--bg); }
+.tc-input:focus { outline: none; border-color: var(--green); }
+
+/* CUSTOMER AGREEMENT */
+.agreement-list { display: flex; flex-direction: column; gap: 12px; }
+.agreement-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--bg); border-radius: 10px; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; }
+.agreement-item:hover { border-color: var(--green); background: #f0fdf4; }
+.agreement-item.checked { border-color: var(--green); background: #f0fdf4; }
+.agreement-check { width: 22px; height: 22px; border: 2px solid #d1d5db; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; background: white; margin-top: 1px; }
+.agreement-item.checked .agreement-check { border-color: var(--green); background: var(--green); }
+.agreement-check svg { display: none; }
+.agreement-item.checked .agreement-check svg { display: block; }
+.agreement-text { font-size: 0.88rem; line-height: 1.55; }
+.agreement-text strong { color: var(--green); }
+
+/* SIGNATURES */
+.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sig-box { border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+.sig-title { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem; letter-spacing: 1.5px; color: var(--green); text-transform: uppercase; margin-bottom: 16px; }
+.sig-area { height: 80px; border-bottom: 2px dashed #d1d5db; margin-bottom: 12px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
+.sig-area-hint { color: #d1d5db; font-size: 0.75rem; font-style: italic; }
+.sig-name { text-align: center; font-weight: 600; font-size: 0.9rem; color: var(--text); margin-bottom: 4px; }
+.sig-date { text-align: center; font-size: 0.8rem; color: var(--muted); margin-bottom: 14px; }
+.for-company { text-align: right; font-size: 0.82rem; color: var(--muted); margin-bottom: 14px; }
+
+/* COVER PAGE (print/PDF only preview) */
+.cover-page {
+  background: linear-gradient(160deg, #e8fdf0 0%, #f0fff4 40%, #e0f2fe 100%);
+  border-radius: 16px; margin-bottom: 24px; padding: 60px 40px 40px;
+  text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+.cover-page::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px; background: radial-gradient(circle, rgba(14,164,75,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cover-logo-wrap { margin-bottom: 24px; }
+.cover-logo { width: 100px; height: 100px; object-fit: contain; }
+.cover-logo-placeholder {
+  width: 100px; height: 100px; background: linear-gradient(135deg, var(--dark-green), var(--green));
+  border-radius: 20px; display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2.5rem; color: white;
+}
+.cover-company { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2rem; color: var(--dark-green); margin-bottom: 6px; letter-spacing: 1px; }
+.cover-tagline { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--green); margin-bottom: 10px; letter-spacing: 0.5px; }
+.cover-sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 32px; }
+.cover-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.cover-badge {
+  display: flex; align-items: center; gap: 8px; padding: 10px 18px;
+  background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(14,164,75,0.12);
+  border: 1.5px solid var(--border);
+}
+.badge-icon { font-size: 1.2rem; }
+.badge-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--dark-green); }
+.cover-footer { margin-top: 36px; padding-top: 20px; border-top: 2px solid var(--light-green); }
+.cover-footer-company { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; color: var(--dark-green); }
+.cover-footer-sub { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+/* LOAD MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal { background: white; border-radius: 16px; padding: 28px; max-width: 520px; width: 95%; max-height: 80vh; overflow-y: auto; }
+.modal-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--dark-green); margin-bottom: 20px; }
+.saved-item { padding: 14px; border: 1.5px solid var(--border); border-radius: 10px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+.saved-item:hover { border-color: var(--green); background: #f0fdf4; }
+.saved-item-info strong { display: block; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--dark-green); font-size: 0.9rem; }
+.saved-item-info span { color: var(--muted); font-size: 0.8rem; }
+.saved-item-del { background: #fee2e2; color: var(--red); border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 0.75rem; font-weight: 700; }
+.modal-close { display: block; width: 100%; padding: 12px; background: var(--bg); border: none; border-radius: 10px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--muted); margin-top: 12px; }
+.no-saved { text-align: center; color: var(--muted); padding: 24px; font-size: 0.9rem; }
+
+/* PRINT / PDF STYLES */
+@media print {
+  #appbar, .no-print { display: none !important; }
+  body { background: white; }
+  #main { max-width: 100%; padding: 0; margin: 0; }
+  .section-card { box-shadow: none; border: 1px solid #e5e7eb; margin-bottom: 20px; break-inside: avoid; }
+  .cover-page { break-after: page; }
+  .form-input, .form-select, select, input, textarea { border-color: #e5e7eb !important; }
+  .page-break { page-break-before: always; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+  .sig-grid { grid-template-columns: 1fr; }
+  .spec-grid { grid-template-columns: 1fr; }
+  .warranty-row { grid-template-columns: 1fr; }
+  .fin-extras { grid-template-columns: 1fr; }
+  .cover-company { font-size: 1.4rem; }
+  .appbar-btns .btn span { display: none; }
+  .commercial-table { font-size: 0.8rem; }
+  .fin-advance-row { flex-direction: column; align-items: flex-start; }
+  .fin-advance-amt { text-align: left; }
+}
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--dark-green); color: white; padding: 12px 24px; border-radius: 10px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.88rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 300; transition: transform 0.3s ease;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- APP BAR -->
+<div id="appbar">
+  <div class="appbar-brand">
+    <svg class="appbar-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="16" fill="white"/>
+      <!-- NSE Logo SVG recreation -->
+      <polygon points="28,75 28,35 48,55 68,35 68,75" fill="none" stroke="#e11d48" stroke-width="7" stroke-linejoin="round"/>
+      <polygon points="28,35 28,60 48,50 68,30 68,55" fill="none" stroke="#0ea44b" stroke-width="6" stroke-linejoin="round" opacity="0.9"/>
+      <line x1="20" y1="55" x2="80" y2="55" stroke="#e11d48" stroke-width="3" opacity="0.7"/>
+    </svg>
+    <div class="appbar-title">NSE QUOTATION<span>N SQUARE ENERGIES</span></div>
+  </div>
+  <div class="appbar-btns no-print">
+    <button class="btn btn-outline" onclick="newQuotation()">📄 <span>New</span></button>
+    <button class="btn btn-white" onclick="saveQuotation()">💾 <span>Save</span></button>
+    <button class="btn btn-outline" onclick="openLoadModal()">📂 <span>Load</span></button>
+    <button class="btn btn-white" onclick="generatePDF()">📑 <span>PDF</span></button>
+    <button class="btn btn-outline" onclick="printQuotation()">🖨️ <span>Print</span></button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main" id="quotation-content">
+
+  <!-- COVER PAGE -->
+  <div class="cover-page section-card" id="cover-section">
+    <div class="cover-logo-wrap">
+      <div class="cover-logo-placeholder">N²</div>
+    </div>
+    <div class="cover-company">N SQUARE ENERGIES</div>
+    <div class="cover-tagline">POWERING THE FUTURE WITH CLEAN ENERGY</div>
+    <div class="cover-sub">Smart Solar Solutions for Homes, Businesses & Industries</div>
+    <div class="cover-badges">
+      <div class="cover-badge"><span class="badge-icon">☀️</span><span class="badge-label">Solar EPC</span></div>
+      <div class="cover-badge"><span class="badge-icon">🔧</span><span class="badge-label">Installation</span></div>
+      <div class="cover-badge"><span class="badge-icon">🛠️</span><span class="badge-label">Maintenance</span></div>
+      <div class="cover-badge"><span class="badge-icon">💡</span><span class="badge-label">Energy Savings</span></div>
+    </div>
+    <div class="cover-footer">
+      <div class="cover-footer-company">N SQUARE ENERGIES</div>
+      <div class="cover-footer-sub">Trusted Solar EPC Partner · Tamil Nadu, India</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: QUOTATION DETAILS -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Quotation Details</div>
+    </div>
+    <div class="section-body">
+      <div class="form-grid" style="margin-bottom:20px">
+        <div class="form-group">
+          <label class="form-label">Quotation Date</label>
+          <input type="date" id="quotDate" class="form-input" onchange="autoCalc()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quotation Number</label>
+          <input type="text" id="quotNum" class="form-input" placeholder="NSE/2026/0001">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Valid Until</label>
+          <input type="date" id="quotValid" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">System Type</label>
+          <select id="sysType" class="form-select">
+            <option>On-Grid Solar System</option>
+            <option>Off-Grid Solar System</option>
+            <option>Hybrid Solar System</option>
+            <option>Grid-Tied with Battery</option>
+          </select>
+        </div>
+      </div>
+      <div class="subsection-title">Customer Information</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Customer Name</label>
+          <input type="text" id="custName" class="form-input" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input type="tel" id="custMobile" class="form-input" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Installation Location</label>
+          <input type="text" id="custLocation" class="form-input" placeholder="City / Address">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sales Person Name</label>
+          <input type="text" id="salesName" class="form-input" placeholder="Sales Executive Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sales Person Mobile</label>
+          <input type="tel" id="salesMobile" class="form-input" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: COMMERCIAL OFFER -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Commercial Offer</div>
+    </div>
+    <div class="section-body" style="padding:0">
+      <div style="overflow-x:auto">
+        <table class="commercial-table">
+          <thead>
+            <tr>
+              <th style="width:30%">Description</th>
+              <th style="width:45%">SPV Capacity / Details</th>
+              <th style="width:25%">Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label"><strong>Solar Ongrid Power Plant</strong><small>Net amount payable by customer (incl. GST)</small></td>
+              <td class="row-input-cell"><input type="text" id="d1" placeholder="e.g. 3.1 KW Panel with 3.6KW Inverter" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a1" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr class="subsidy-row">
+              <td class="row-label"><strong>MNRE Subsidy</strong><small>Released directly to consumer bank account</small></td>
+              <td class="row-input-cell"><input type="text" id="d2" placeholder="e.g. PM Surya Ghar – Govt. Subsidy" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a2" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr>
+              <td class="row-label"><strong>Additional Wiring</strong><small>Beyond 25m – ₹275/mtr + GST 18%</small></td>
+              <td class="row-input-cell"><input type="text" id="d3" placeholder="NIL / specify details" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a3" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr>
+              <td class="row-label"><strong>Elevated Structure</strong><small>7ft – ₹5,000/kW extra</small></td>
+              <td class="row-input-cell"><input type="text" id="d4" placeholder="NIL / specify" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a4" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr>
+              <td class="row-label"><strong>Civil / Structural Work</strong><small>Based on site requirements</small></td>
+              <td class="row-input-cell"><input type="text" id="d5" placeholder="NIL / specify" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a5" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr>
+              <td class="row-label"><strong>Net Meter (TNEB)</strong><small>TNEB net meter charges</small></td>
+              <td class="row-input-cell"><input type="text" id="d6" placeholder="TNEB net meter charges" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a6" value="0" oninput="autoCalc()"></td>
+            </tr>
+            <tr>
+              <td class="row-label"><strong>Other Charges</strong><small>Miscellaneous</small></td>
+              <td class="row-input-cell"><input type="text" id="d7" placeholder="Specify if any" oninput="autoCalc()"></td>
+              <td class="amount-cell"><input type="number" id="a7" value="0" oninput="autoCalc()"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FINANCIAL SUMMARY -->
+      <div style="padding:20px">
+        <div class="fin-summary">
+          <div class="fin-title">💰 Financial Summary</div>
+          <div class="fin-row">
+            <span class="fin-row-label">Gross Total (before subsidy)</span>
+            <span class="fin-row-value" id="grossTotal">₹0</span>
+          </div>
+          <div class="fin-row subsidy">
+            <span class="fin-row-label">(–) MNRE Subsidy (Credited directly to consumer account)</span>
+            <span class="fin-row-value" id="subsidyDisp">₹0</span>
+          </div>
+          <div class="fin-net">
+            <span class="fin-net-label">Net Payable by Customer</span>
+            <span class="fin-net-value" id="netPayable">₹0</span>
+          </div>
+          <div class="fin-words">
+            <div class="fin-words-label">Amount in Words</div>
+            <div class="fin-words-text" id="amountWords">Zero Rupees Only</div>
+          </div>
+          <div class="fin-extras">
+            <div class="fin-extra-box">
+              <div class="fin-extra-label">GST % (Included in above)</div>
+              <div class="fin-extra-val">8.9%</div>
+            </div>
+            <div class="fin-extra-box">
+              <div class="fin-extra-label">GST Amount (Included)</div>
+              <div class="fin-extra-val" id="gstAmt">₹0</div>
+            </div>
+          </div>
+          <div class="fin-advance-row">
+            <span class="fin-advance-label">Advance Required</span>
+            <div class="fin-advance-pct">
+              <input type="number" id="advPct" value="70" min="0" max="100" oninput="autoCalc()">
+            </div>
+            <span style="font-size:0.88rem;color:var(--muted)">%</span>
+            <span class="fin-advance-amt" id="advAmt">₹0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: TECHNICAL SPECIFICATIONS -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Technical Specifications</div>
+    </div>
+    <div class="section-body" style="padding:0">
+      <div class="spec-grid" style="border:1px solid var(--border); border-radius:8px; overflow:hidden; margin:16px">
+        <div class="spec-row">
+          <div>SPV Modules (Wp)</div>
+          <div><input type="text" id="spv" placeholder="e.g. 620W DCR TOPCON N TYPE G12R" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Number of Panels (Qty)</div>
+          <div><input type="text" id="panels" placeholder="e.g. 5" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Panel Make / Brand</div>
+          <div><input type="text" id="panelBrand" placeholder="e.g. ADANI / WAAREE / TATA" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Inverter (PCU) Capacity</div>
+          <div><input type="text" id="invCap" placeholder="e.g. 3.6 KW" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Inverter Make / Brand</div>
+          <div><input type="text" id="invBrand" placeholder="e.g. POLYCAB / HAVELLS" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Module Mounting Structure</div>
+          <div><input type="text" id="mms" placeholder="e.g. 7.5 feet GI structure" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>DC Distribution & AC Control Boxes</div>
+          <div><input type="text" id="dcac" placeholder="e.g. HAVELLS" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>DC Tinned Copper Cables</div>
+          <div><input type="text" id="dcCable" placeholder="e.g. 4 SQ.MM POLYCAB" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>AC Flexible Copper Cables</div>
+          <div><input type="text" id="acCable" placeholder="e.g. 4 SQ.MM POLYCAB" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Earthing</div>
+          <div><input type="text" id="earthing" placeholder="e.g. 3×14 mm 1 meter Copper Bonded Earthing rod" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Lightning Arrestor</div>
+          <div><input type="text" id="lightning" placeholder="e.g. 1 × Multi spike Copper Bonded" class="form-input"></div>
+        </div>
+        <div class="spec-row">
+          <div>Estimated Annual Generation</div>
+          <div><input type="text" id="annualGen" placeholder="e.g. 5475 Units" class="form-input"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: WARRANTY & AFTER SALES -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Warranty &amp; After-Sales</div>
+    </div>
+    <div class="section-body">
+      <div class="warranty-grid">
+        <div class="warranty-row">
+          <label class="warranty-label">System Warranty</label>
+          <input type="text" id="w1" class="form-input" value="12 Years replacement warranty">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">Solar Panel Performance Warranty</label>
+          <input type="text" id="w2" class="form-input" value="18 Years (manufacturer warranty)">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">Inverter Warranty</label>
+          <input type="text" id="w3" class="form-input" value="10 years (manufacturer warranty passed to consumer)">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">Free Maintenance Period</label>
+          <input type="text" id="w4" class="form-input" value="5 years free maintenance">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">AMC (After Free Period)</label>
+          <input type="text" id="w5" class="form-input" value="Rs. 300 per visit per kW (based on visits required)">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">Installation Timeline</label>
+          <input type="text" id="w6" class="form-input" value="Within 15 days from Technical Feasibility approval">
+        </div>
+        <div class="warranty-row">
+          <label class="warranty-label">Subsidy Release Timeline</label>
+          <input type="text" id="w7" class="form-input" value="Within 30 days from submission of installation report">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: TERMS & CONDITIONS -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Terms &amp; Conditions</div>
+    </div>
+    <div class="section-body">
+      <div class="tc-list">
+        <div class="tc-item"><span class="tc-num">1.</span><input type="text" id="tc1" class="tc-input" value="Subsidy is applicable only for domestic consumers under 1A / 1D / 1E Tariff."></div>
+        <div class="tc-item"><span class="tc-num">2.</span><input type="text" id="tc2" class="tc-input" value="Subsidy is available for limited quantity & allotment is on First Come First Serve basis only."></div>
+        <div class="tc-item"><span class="tc-num">3.</span><input type="text" id="tc3" class="tc-input" value="Delivery and installation will be made within 15 days from the date of sanction of Technical Feasibility."></div>
+        <div class="tc-item"><span class="tc-num">4.</span><input type="text" id="tc4" class="tc-input" value="Central Govt. subsidy (CFA) will be released directly to the bank account of the consumer within 30 days."></div>
+        <div class="tc-item"><span class="tc-num">5.</span><input type="text" id="tc5" class="tc-input" value="Any structural modification or civil work based on site conditions shall be payable extra."></div>
+        <div class="tc-item"><span class="tc-num">6.</span><input type="text" id="tc6" class="tc-input" value="The above price is inclusive of GST 8.90% chargeable by the Government."></div>
+        <div class="tc-item"><span class="tc-num">7.</span><input type="text" id="tc7" class="tc-input" value="Inverter comes with 10 years warranty by the manufacturer."></div>
+        <div class="tc-item"><span class="tc-num">8.</span><input type="text" id="tc8" class="tc-input" value="All payments should be made by Cheque / DD / NEFT / RTGS only. Cash payment will not be accepted."></div>
+        <div class="tc-item"><span class="tc-num">9.</span><input type="text" id="tc9" class="tc-input" value="AMC for solar power plant is based on the number of visits required per year."></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: CUSTOMER AGREEMENT -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Customer Agreement</div>
+    </div>
+    <div class="section-body">
+      <div class="agreement-list">
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I have read and understood all the <strong>Terms &amp; Conditions</strong> mentioned in this quotation and I agree to abide by them.</div>
+        </div>
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I agree that <strong>advance payment</strong> is required at the time of order confirmation as per the payment terms stated.</div>
+        </div>
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I understand that the <strong>MNRE / PM Surya Ghar subsidy</strong> will be released directly to my registered bank account by the Government within 30 days of installation report submission.</div>
+        </div>
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I acknowledge that <strong>civil / structural work, earth pit charges, and elevated structure charges</strong> (if applicable) are outside the scope of the quoted price and will be billed as actuals.</div>
+        </div>
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I agree to provide all <strong>necessary KYC documents</strong> (Aadhaar, PAN, EB Bill, Bank Passbook, etc.) required for MNRE portal registration and subsidy application.</div>
+        </div>
+        <div class="agreement-item" onclick="toggleAgreement(this)">
+          <div class="agreement-check"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="agreement-text">I confirm that the <strong>installation address</strong> stated in this quotation is correct and I have the legal right / permission to install the solar system on the said premises.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: SIGNATURES -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Signatures</div>
+    </div>
+    <div class="section-body">
+      <div class="sig-grid">
+        <div class="sig-box">
+          <div class="sig-title">Customer Signature</div>
+          <div class="sig-area"><span class="sig-area-hint">Sign here</span></div>
+          <div class="sig-name" id="sigCustName">_______________</div>
+          <div class="sig-date" id="sigDate">Date: ___________</div>
+          <div class="form-group" style="margin-top:12px">
+            <label class="form-label">Place</label>
+            <input type="text" id="sigPlace" class="form-input" placeholder="City / Location">
+          </div>
+        </div>
+        <div class="sig-box">
+          <div class="sig-title">Authorized Signatory</div>
+          <div class="sig-area"><span class="sig-area-hint">Sign here</span></div>
+          <div class="for-company">For <strong>N Square Energies</strong></div>
+          <div class="form-group" style="margin-bottom:10px">
+            <label class="form-label">Authorized Person Name</label>
+            <input type="text" id="authName" class="form-input" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Designation</label>
+            <input type="text" id="authDesig" class="form-input" placeholder="e.g. Sales Manager">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end #main -->
+
+<!-- LOAD MODAL -->
+<div class="modal-overlay" id="loadModal">
+  <div class="modal">
+    <div class="modal-title">📂 Load Saved Quotation</div>
+    <div id="savedList"></div>
+    <button class="modal-close" onclick="closeLoadModal()">Close</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================== INIT =====================
+window.onload = function() {
+  autoFillDates();
+  autoCalc();
+  syncSigFields();
+};
+
+function autoFillDates() {
+  const today = new Date();
+  const todayStr = formatDate(today);
+  document.getElementById('quotDate').value = todayStr;
+
+  const valid = new Date(today);
+  valid.setDate(valid.getDate() + 30);
+  document.getElementById('quotValid').value = formatDate(valid);
+
+  // Auto generate quotation number
+  const saved = JSON.parse(localStorage.getItem('nse_quotations') || '[]');
+  const year = today.getFullYear();
+  const num = String(saved.length + 1).padStart(4, '0');
+  document.getElementById('quotNum').value = `NSE/${year}/${num}`;
+}
+
+function formatDate(d) {
+  return d.toISOString().split('T')[0];
+}
+
+// ===================== CALCULATIONS =====================
+function autoCalc() {
+  const a1 = parseFloat(document.getElementById('a1').value) || 0;
+  const a2 = parseFloat(document.getElementById('a2').value) || 0;
+  const a3 = parseFloat(document.getElementById('a3').value) || 0;
+  const a4 = parseFloat(document.getElementById('a4').value) || 0;
+  const a5 = parseFloat(document.getElementById('a5').value) || 0;
+  const a6 = parseFloat(document.getElementById('a6').value) || 0;
+  const a7 = parseFloat(document.getElementById('a7').value) || 0;
+
+  const gross = a1 + a3 + a4 + a5 + a6 + a7;
+  const subsidy = a2;
+  const net = gross; // net payable is gross (subsidy goes to bank directly)
+  const gst = net * 8.9 / 100;
+  const advPct = parseFloat(document.getElementById('advPct').value) || 70;
+  const adv = net * advPct / 100;
+
+  document.getElementById('grossTotal').textContent = formatINR(gross);
+  document.getElementById('subsidyDisp').textContent = '₹' + formatINR(subsidy).replace('₹','');
+  document.getElementById('netPayable').textContent = formatINR(net);
+  document.getElementById('gstAmt').textContent = formatINR(gst);
+  document.getElementById('advAmt').textContent = formatINR(adv);
+  document.getElementById('amountWords').textContent = numToWords(Math.round(net)) + ' only';
+
+  syncSigFields();
+}
+
+function formatINR(n) {
+  if (isNaN(n)) return '₹0';
+  return '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+}
+
+// ===================== AMOUNT IN WORDS =====================
+function numToWords(n) {
+  if (n === 0) return 'Zero Rupees';
+  const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+
+  function convert(num) {
+    if (num < 20) return ones[num];
+    if (num < 100) return tens[Math.floor(num/10)] + (num % 10 ? ' ' + ones[num % 10] : '');
+    if (num < 1000) return ones[Math.floor(num/100)] + ' Hundred' + (num % 100 ? ' ' + convert(num % 100) : '');
+    if (num < 100000) return convert(Math.floor(num/1000)) + ' Thousand' + (num % 1000 ? ' ' + convert(num % 1000) : '');
+    if (num < 10000000) return convert(Math.floor(num/100000)) + ' Lakh' + (num % 100000 ? ' ' + convert(num % 100000) : '');
+    return convert(Math.floor(num/10000000)) + ' Crore' + (num % 10000000 ? ' ' + convert(num % 10000000) : '');
+  }
+
+  const rupees = Math.floor(n);
+  const paise = Math.round((n - rupees) * 100);
+  let result = 'Rupees ' + convert(rupees);
+  if (paise > 0) result += ' and ' + convert(paise) + ' Paise';
+  return result;
+}
+
+// ===================== SIG SYNC =====================
+function syncSigFields() {
+  const cName = document.getElementById('custName').value;
+  const qDate = document.getElementById('quotDate').value;
+  const sigCust = document.getElementById('sigCustName');
+  const sigD = document.getElementById('sigDate');
+  if (sigCust) sigCust.textContent = cName || '_______________';
+  if (sigD && qDate) {
+    const d = new Date(qDate);
+    sigD.textContent = 'Date: ' + d.toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'});
+  }
+}
+document.getElementById('custName').addEventListener('input', syncSigFields);
+document.getElementById('quotDate').addEventListener('change', syncSigFields);
+
+// ===================== AGREEMENT TOGGLE =====================
+function toggleAgreement(el) {
+  el.classList.toggle('checked');
+}
+
+// ===================== SAVE =====================
+function collectData() {
+  const ids = ['quotDate','quotNum','quotValid','sysType','custName','custMobile','custLocation','salesName','salesMobile',
+    'a1','a2','a3','a4','a5','a6','a7','d1','d2','d3','d4','d5','d6','d7','advPct',
+    'spv','panels','panelBrand','invCap','invBrand','mms','dcac','dcCable','acCable','earthing','lightning','annualGen',
+    'w1','w2','w3','w4','w5','w6','w7',
+    'tc1','tc2','tc3','tc4','tc5','tc6','tc7','tc8','tc9',
+    'sigPlace','authName','authDesig'];
+  const data = {};
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value || el.textContent;
+  });
+  // agreements
+  const items = document.querySelectorAll('.agreement-item');
+  data.agreements = Array.from(items).map(i => i.classList.contains('checked'));
+  return data;
+}
+
+function fillData(data) {
+  const ids = ['quotDate','quotNum','quotValid','sysType','custName','custMobile','custLocation','salesName','salesMobile',
+    'a1','a2','a3','a4','a5','a6','a7','d1','d2','d3','d4','d5','d6','d7','advPct',
+    'spv','panels','panelBrand','invCap','invBrand','mms','dcac','dcCable','acCable','earthing','lightning','annualGen',
+    'w1','w2','w3','w4','w5','w6','w7',
+    'tc1','tc2','tc3','tc4','tc5','tc6','tc7','tc8','tc9',
+    'sigPlace','authName','authDesig'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && data[id] !== undefined) el.value = data[id];
+  });
+  if (data.agreements) {
+    const items = document.querySelectorAll('.agreement-item');
+    items.forEach((item, i) => {
+      if (data.agreements[i]) item.classList.add('checked');
+      else item.classList.remove('checked');
+    });
+  }
+  autoCalc();
+}
+
+function saveQuotation() {
+  const data = collectData();
+  const saved = JSON.parse(localStorage.getItem('nse_quotations') || '[]');
+  const existing = saved.findIndex(s => s.quotNum === data.quotNum);
+  const entry = { ...data, savedAt: new Date().toISOString() };
+  if (existing >= 0) saved[existing] = entry;
+  else saved.push(entry);
+  localStorage.setItem('nse_quotations', JSON.stringify(saved));
+  showToast('✅ Quotation saved successfully!');
+}
+
+// ===================== LOAD =====================
+function openLoadModal() {
+  const saved = JSON.parse(localStorage.getItem('nse_quotations') || '[]');
+  const list = document.getElementById('savedList');
+  if (saved.length === 0) {
+    list.innerHTML = '<div class="no-saved">No saved quotations found.</div>';
+  } else {
+    list.innerHTML = saved.map((s, i) => `
+      <div class="saved-item">
+        <div class="saved-item-info" onclick="loadQuotation(${i})">
+          <strong>${s.quotNum || 'Unnamed'} — ${s.custName || 'No Customer'}</strong>
+          <span>${s.custLocation || ''} · Saved: ${new Date(s.savedAt).toLocaleDateString('en-IN')}</span>
+        </div>
+        <button class="saved-item-del" onclick="deleteSaved(${i})">Delete</button>
+      </div>`).join('');
+  }
+  document.getElementById('loadModal').classList.add('open');
+}
+
+function loadQuotation(i) {
+  const saved = JSON.parse(localStorage.getItem('nse_quotations') || '[]');
+  if (saved[i]) { fillData(saved[i]); closeLoadModal(); showToast('📂 Quotation loaded!'); }
+}
+
+function deleteSaved(i) {
+  const saved = JSON.parse(localStorage.getItem('nse_quotations') || '[]');
+  saved.splice(i, 1);
+  localStorage.setItem('nse_quotations', JSON.stringify(saved));
+  openLoadModal();
+  showToast('🗑️ Deleted');
+}
+
+function closeLoadModal() {
+  document.getElementById('loadModal').classList.remove('open');
+}
+
+// ===================== NEW QUOTATION =====================
+function newQuotation() {
+  if (!confirm('Start a new quotation? Unsaved changes will be lost.')) return;
+  // Clear all inputs
+  document.querySelectorAll('input[type=text], input[type=tel], input[type=number], input[type=date]').forEach(el => {
+    if (el.id && ['advPct'].includes(el.id)) el.value = 70;
+    else el.value = '';
+  });
+  document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+  document.querySelectorAll('.agreement-item').forEach(el => el.classList.remove('checked'));
+  // Restore T&C defaults
+  const tcDefaults = [
+    'Subsidy is applicable only for domestic consumers under 1A / 1D / 1E Tariff.',
+    'Subsidy is available for limited quantity & allotment is on First Come First Serve basis only.',
+    'Delivery and installation will be made within 15 days from the date of sanction of Technical Feasibility.',
+    'Central Govt. subsidy (CFA) will be released directly to the bank account of the consumer within 30 days.',
+    'Any structural modification or civil work based on site conditions shall be payable extra.',
+    'The above price is inclusive of GST 8.90% chargeable by the Government.',
+    'Inverter comes with 10 years warranty by the manufacturer.',
+    'All payments should be made by Cheque / DD / NEFT / RTGS only. Cash payment will not be accepted.',
+    'AMC for solar power plant is based on the number of visits required per year.'
+  ];
+  tcDefaults.forEach((t,i) => { const el = document.getElementById('tc'+(i+1)); if(el) el.value = t; });
+  const wDefaults = [
+    '12 Years replacement warranty', '18 Years (manufacturer warranty)',
+    '10 years (manufacturer warranty passed to consumer)', '5 years free maintenance',
+    'Rs. 300 per visit per kW (based on visits required)', 'Within 15 days from Technical Feasibility approval',
+    'Within 30 days from submission of installation report'
+  ];
+  wDefaults.forEach((w,i) => { const el = document.getElementById('w'+(i+1)); if(el) el.value = w; });
+  document.getElementById('advPct').value = 70;
+  autoFillDates();
+  autoCalc();
+  showToast('📄 New quotation started');
+}
+
+// ===================== PDF =====================
+function generatePDF() {
+  showToast('⏳ Generating PDF…');
+  const appbar = document.getElementById('appbar');
+  appbar.style.display = 'none';
+  const opt = {
+    margin: [8, 8, 8, 8],
+    filename: 'NSE_Quotation_' + (document.getElementById('quotNum').value || 'Draft') + '.pdf',
+    image: { type: 'jpeg', quality: 0.97 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+  html2pdf().set(opt).from(document.getElementById('main')).save().then(() => {
+    appbar.style.display = '';
+    showToast('✅ PDF downloaded!');
+  });
+}
+
+// ===================== PRINT =====================
+function printQuotation() {
+  window.print();
+}
+
+// ===================== TOAST =====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ===================== CLOSE MODAL ON OVERLAY =====================
+document.getElementById('loadModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLoadModal();
+});
+</script>
+</body>
+</html>
